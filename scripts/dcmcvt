@@ -1,0 +1,54 @@
+import sys, os
+import argparse
+
+
+def main(options, args):
+
+    if options.format == 'png':
+        out_ext = '.png'
+        from dcmcvt.convert.png import dicom2png as convert
+    elif options.format == 'fits':
+        out_ext = '.fits'
+        from dcmcvt.convert.fits import dicom2fits as convert
+    else:
+        raise ValueError("Please specify {fits|png} with -f")
+
+    for path in args:
+        folder, file = os.path.split(path)
+        name, ext = os.path.splitext(file)
+
+        prefix = folder
+        if options.output_dir is not None:
+            prefix = options.output_dir
+        outname = name + out_ext
+        if options.output_file is not None:
+            outname = options.output_file
+            if not outname.endswith(out_ext):
+                outname = outname + out_ext
+        out_path = os.path.join(prefix, outname)
+
+        try:
+            print("converting {} to {}".format(path, out_path))
+            convert(path, out_path)
+        except Exception as e:
+            print("error in conversion: {}".format(e))
+
+
+if __name__ == "__main__":
+
+    # Parse command line options
+    argprs = argparse.ArgumentParser("DICOM converter")
+
+    argprs.add_argument("-d", "--output_dir", dest="output_dir",
+                        default=None,
+                        help="Set output directory")
+    argprs.add_argument("-f", "--format", dest="format",
+                        default=None,
+                        help="FORMAT to use for converting DICOM file")
+    argprs.add_argument("-o", "--output_file", dest="output_file",
+                        default=None,
+                        help="Set output filename")
+
+    (options, args) = argprs.parse_known_args(sys.argv[1:])
+
+    main(options, args)
