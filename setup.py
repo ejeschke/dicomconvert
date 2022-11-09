@@ -1,14 +1,9 @@
 #! /usr/bin/env python
 #
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 import os
 
 srcdir = os.path.dirname(__file__)
-
-from distutils.command.build_py import build_py
 
 long_description = '''
 Convert DICOM medical image files to FITS or PNG.
@@ -20,7 +15,7 @@ Convert DICOM medical image files to FITS or PNG.
 
 setup(
     name = "dcmcvt",
-    version = "0.1.0",
+    version = "0.2.0",
     author = "Eric Jeschke",
     author_email = "eric@naoj.org",
     description = ("Convert medical DICOM images to FITS or PNG."),
@@ -44,10 +39,6 @@ setup(
           'Operating System :: Microsoft :: Windows',
           'Operating System :: POSIX',
           'Programming Language :: C',
-          'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3.7',
-          'Topic :: Scientific/Engineering :: Astronomy',
-          'Topic :: Scientific/Engineering :: Physics',
           ],
-    cmdclass={'build_py': build_py}
 )

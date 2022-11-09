@@ -25,11 +25,7 @@ BUILDING AND INSTALLATION
 -------------------------
 dcmcvt uses a standard python based install, e.g.
 
-    $ python setup.py build
-
-or
-
-    $ python setup.py install
+    $ pip install .
 
 The program can then be run using the command "dcmcvt"
 
@@ -69,4 +65,4 @@ Using magic "file" command to convert all DICOM files found in a folder
 hierarchy:
 
 $ find . -print -exec file \{\} \; | grep DICOM | \
-    awk '{print substr($1,1,length($1)-1)}' | xargs dcmcvt -f fits 
+    awk '{print substr($1,1,length($1)-1)}' | xargs dcmcvt -f fits -o outputdir
