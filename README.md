@@ -70,9 +70,9 @@ Convert a bunch of DICOM files, putting results in a certain folder:
     $ dcmcvt -f fits -d OUTPUTFOLDER DICOMFILE ...
 
 Using magic "file" command to convert all DICOM files found in a folder
-hierarchy:
+hierarchy, and put them in the directory "outputdir":
 
     $ find . -print -exec file \{\} \; | grep DICOM | \
         awk '{print substr($1,1,length($1)-1)}' | \
-        xargs dcmcvt -f fits -o outputdir
+        xargs dcmcvt -f fits -d outputdir
 
