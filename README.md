@@ -1,6 +1,10 @@
-dcmcvt ABOUT
-------------
-dcmcvt is a python package for converting DICOM medical image files to
+dcmcvt
+======
+
+ABOUT
+-----
+
+dcmcvt is a python program for converting DICOM medical image files to
 other more easily read formats.
 
 Currently, the formats supported are FITS and PNG.  However, from these
@@ -13,24 +17,27 @@ abbreviated FITS keywords and values in the primary HDU (which contains
 the image), and also output a second HDU that is a table containing all the
 metadata in a non-abbreviated format.
 
-
 COPYRIGHT AND LICENSE
 ---------------------
-Copyright (c) 2021  Eric Jeschke.  All rights reserved.
+
+Copyright (c) 2021-2022  Eric Jeschke.  All rights reserved.
 
 dcmcvt is distributed under an open-source BSD licence.  Please see the
-file LICENSE.txt in the top-level directory for details.
+file LICENSE.md in the top-level directory for details.
 
 BUILDING AND INSTALLATION
 -------------------------
+
 dcmcvt uses a standard python based install, e.g.
 
     $ pip install .
 
-The program can then be run using the command "dcmcvt"
+The program can then be run using the command "dcmcvt".
+See usage examples below.
 
 REQUIREMENTS
 ------------
+
 - pydicom (for reading DICOM files)
 - pyyaml (for translating metadata)
 - astropy (for writing FITS files)
@@ -38,31 +45,34 @@ REQUIREMENTS
 
 ON THE WEB
 ----------
-http://github.com/ejeschke/dicomconvert
 
+[Home page](http://github.com/ejeschke/dicomconvert)
 
 USAGE
 -----
+
 Get help message:
 
-$ dcmcvt -h
+    $ dcmcvt -h
 
 You need to specify a -f parameter to choose FITS or PNG format.
 
 Convert a DICOM file to FITS format:
 
-$ dcmcvt -f fits DICOMFILE -o NEWNAME.fits
+    $ dcmcvt -f fits DICOMFILE -o NEWNAME.fits
 
 Convert a DICOM file to PNG format:
 
-$ dcmcvt -f png DICOMFILE -o NEWNAME.png
+    $ dcmcvt -f png DICOMFILE -o NEWNAME.png
 
 Convert a bunch of DICOM files, putting results in a certain folder:
 
-$ dcmcvt -f fits -d OUTPUTFOLDER DICOMFILE ...
+    $ dcmcvt -f fits -d OUTPUTFOLDER DICOMFILE ...
 
 Using magic "file" command to convert all DICOM files found in a folder
 hierarchy:
 
-$ find . -print -exec file \{\} \; | grep DICOM | \
-    awk '{print substr($1,1,length($1)-1)}' | xargs dcmcvt -f fits -o outputdir
+    $ find . -print -exec file \{\} \; | grep DICOM | \
+        awk '{print substr($1,1,length($1)-1)}' | \
+        xargs dcmcvt -f fits -o outputdir
+
