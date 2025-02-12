@@ -20,7 +20,7 @@ metadata in a non-abbreviated format.
 COPYRIGHT AND LICENSE
 ---------------------
 
-Copyright (c) 2021-2022  Eric Jeschke.  All rights reserved.
+Copyright (c) 2021-2025  Eric Jeschke.  All rights reserved.
 
 dcmcvt is distributed under an open-source BSD licence.  Please see the
 file LICENSE.md in the top-level directory for details.
@@ -41,7 +41,7 @@ REQUIREMENTS
 - pydicom (for reading DICOM files)
 - pyyaml (for translating metadata)
 - astropy (for writing FITS files)
-- opencv-python (for writing PNG files)
+- opencv-python-headless (for writing PNG files)
 
 ON THE WEB
 ----------
@@ -69,8 +69,10 @@ Convert a bunch of DICOM files, putting results in a certain folder:
 
     $ dcmcvt -f fits -d OUTPUTFOLDER DICOMFILE ...
 
-Using magic "file" command to convert all DICOM files found in a folder
-hierarchy, and put them in the directory "outputdir":
+Normally, if you get a disk containing all of the DICOM files, they will
+be in a huge folder nested down many levels.  Here we use the magic "file"
+command to convert all DICOM files found in a folder hierarchy, and put
+them in the directory "outputdir":
 
     $ find . -print -exec file \{\} \; | grep DICOM | \
         awk '{print substr($1,1,length($1)-1)}' | \
